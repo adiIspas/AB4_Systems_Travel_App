@@ -1,0 +1,4 @@
+Cabana A _ Sinaia _ 120 _ schi,munte,altele _ 2016.12.16 _ 2017.10.01
+Cabana A _ Sinaia _ 120 _ schi,munte,altele _ 2016.10.10
+Cabana B _ Sinaia _ 120 _ schi,munte,altele _ 2016.10.10 _ 2016.10.15
+Cabana A _ Sinaia _ 125 _ schi,munte,ciclism,altele _ 2016.12.16 _ 2017.10.10
