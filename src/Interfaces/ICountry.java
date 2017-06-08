@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Adrian Ispas on 07.06.2017.
  * Interface which modeling the country object.
  */
-public interface ICountry {
+public interface ICountry extends ILocation{
 
     // Set the name of country
     void setName(String name);

@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by Adrian Ispas on 07.06.2017.
  * Interface which modeling the district object.
  */
-public interface IPlace {
+public interface IPlace extends ILocation{
 
     // Set the name of place
     void setName(String name);
