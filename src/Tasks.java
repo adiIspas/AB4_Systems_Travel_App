@@ -14,7 +14,7 @@ import java.util.Iterator;
  */
 public class Tasks {
     static IPlace findLocation(Connection conn, String locationName) throws SQLException, JSONException {
-        String selectSQL = "SELECT * FROM place WHERE Name = ?";
+        String selectSQL = "SELECT * FROM place USE INDEX(index_place_name) WHERE Name = ?";
 
         PreparedStatement preparedStatement = conn.prepareStatement(selectSQL);
         preparedStatement.setString(1, locationName);
@@ -27,13 +27,13 @@ public class Tasks {
             Date beginDate = rs.getDate("BeginDate");
             Date endDate = rs.getDate("EndDate");
 
-            JSONObject json = new JSONObject(activities);
+            JSONObject actvsJson = new JSONObject(activities);
 
-            Iterator<String> keys = json.keys();
+            Iterator<String> keys = actvsJson.keys();
             ArrayList<String> actvs = new ArrayList<>();
             while(keys.hasNext()) {
                 String key = keys.next();
-                String val = json.getString(key);
+                String val = actvsJson.getString(key);
                 actvs.add(val);
             }
 
@@ -44,7 +44,7 @@ public class Tasks {
     }
 
     static IPlace findCheapest(Connection conn, String activity, Integer numberOfDays) throws SQLException, JSONException {
-        String selectSQL = "SELECT DISTINCT * FROM place WHERE datediff(EndDate,BeginDate) >= ? ORDER BY AvgPrice ASC";
+        String selectSQL = "SELECT DISTINCT * FROM place USE INDEX(index_place_begindate, index_place_enddate, index_place_avgprice) WHERE datediff(EndDate,BeginDate) >= ? ORDER BY AvgPrice ASC";
 
         PreparedStatement preparedStatement = conn.prepareStatement(selectSQL);
         preparedStatement.setInt(1, numberOfDays);
@@ -58,14 +58,14 @@ public class Tasks {
             Date beginDate = rs.getDate("BeginDate");
             Date endDate = rs.getDate("EndDate");
 
-            JSONObject json = new JSONObject(activities);
+            JSONObject actvsJson = new JSONObject(activities);
 
-            Iterator<String> keys = json.keys();
+            Iterator<String> keys = actvsJson.keys();
             ArrayList<String> actvs = new ArrayList<>();
 
             while(keys.hasNext()){
                 String key = keys.next();
-                String val = json.getString(key);
+                String val = actvsJson.getString(key);
                 actvs.add(val);
             }
 
@@ -83,7 +83,7 @@ public class Tasks {
         if(country != null){
             Boolean completed = false;
 
-            String selectSQL = "SELECT DISTINCT * FROM place p " +
+            String selectSQL = "SELECT DISTINCT * FROM place p USE INDEX(index_place_avgprice)" +
                     "JOIN city ci ON (p.City = ci.Name)" +
                     "JOIN district d ON (ci.idDistrict = d.idDistrict)" +
                     "JOIN country ct ON (d.idCountry = ct.idCountry)" +
@@ -105,14 +105,14 @@ public class Tasks {
                 Date beginDateOfPlace = rs.getDate("BeginDate");
                 Date endDateOfPlace = rs.getDate("EndDate");
 
-                JSONObject json = new JSONObject(activities);
+                JSONObject actvsJson = new JSONObject(activities);
 
-                Iterator<String> keys = json.keys();
+                Iterator<String> keys = actvsJson.keys();
                 ArrayList<String> actvs = new ArrayList<>();
 
                 while(keys.hasNext()){
                     String key = keys.next();
-                    String val = json.getString(key);
+                    String val = actvsJson.getString(key);
                     actvs.add(val);
                 }
 
@@ -149,14 +149,14 @@ public class Tasks {
                 Date beginDateOfPlace = rs.getDate("BeginDate");
                 Date endDateOfPlace = rs.getDate("EndDate");
 
-                JSONObject json = new JSONObject(activities);
+                JSONObject actvsJson = new JSONObject(activities);
 
-                Iterator<String> keys = json.keys();
+                Iterator<String> keys = actvsJson.keys();
                 ArrayList<String> actvs = new ArrayList<>();
 
                 while(keys.hasNext()){
                     String key = keys.next();
-                    String val = json.getString(key);
+                    String val = actvsJson.getString(key);
                     actvs.add(val);
                 }
 
@@ -192,14 +192,14 @@ public class Tasks {
                 Date beginDateOfPlace = rs.getDate("BeginDate");
                 Date endDateOfPlace = rs.getDate("EndDate");
 
-                JSONObject json = new JSONObject(activities);
+                JSONObject actvsJson = new JSONObject(activities);
 
-                Iterator<String> keys = json.keys();
+                Iterator<String> keys = actvsJson.keys();
                 ArrayList<String> actvs = new ArrayList<>();
 
                 while(keys.hasNext()){
                     String key = keys.next();
-                    String val = json.getString(key);
+                    String val = actvsJson.getString(key);
                     actvs.add(val);
                 }
 
