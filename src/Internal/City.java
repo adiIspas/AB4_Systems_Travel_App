@@ -29,8 +29,16 @@ public class City implements ICity {
 
     @Override
     public String toString() {
-        return "City{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City)) return false;
+
+        City city = (City) o;
+
+        return getName() != null ? getName().equals(city.getName()) : city.getName() == null;
     }
 }

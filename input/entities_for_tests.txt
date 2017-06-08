@@ -1,3 +1,7 @@
-Romania _ Olt _ Locatia A _ Slatina _ 100 _ act1,act2,act3 _ 2017.01.01 _ 2017.03.07
+Romania _ Olt _ Locatia A _ Slatina _ 500 _ act1,act2,act3 _ 2017.01.01 _ 2017.03.07
 Romania _ Bucuresti _ Locatia B _ Bucuresti _ 200 _ act4,act5,act6 _ 2017.03.08 _ 2017.06.01
-Romania _ Constanta _ Locatia C _ Constanta _ 199 _ act6,act7,act8 _ 2017.03.08 _ 2017.03.12
+Romania _ Constanta _ Locatia C _ Constanta _ 199 _ act4,act7,act8 _ 2017.03.08 _ 2017.03.12
+Romania _ Timis _ Locatia Z _ Timisoara _ 150 _ act4,act7,act8 _ 2017.03.09 _ 2017.03.12
+Romania _ Iasi _ Locatia P _ Iasi _ 149 _ act4,act7,act8 _ 2017.03.10 _ 2017.03.14
+Romania _ Dolj _ Locatia B _ Craiova _ 120 _ act4,act7,act8 _ 2017.03.08 _ 2017.03.15
+Romania _ Arges _ Locatia L _ Pitesti _ 100 _ act4,act7,act8 _ 2017.03.07 _ 2017.03.11
