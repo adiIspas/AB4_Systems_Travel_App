@@ -13,14 +13,19 @@ public class SaveData {
      static void saveIntoDB(Connection conn, String file) throws SQLException, JSONException, ParseException {
 
         ArrayList<String[]> list = ReadData.readData(file);
+        boolean haveCountry = false;
+        boolean haveDistrict = false;
+        boolean haveCity = false;
 
         for (String[] currentLine : list) {
-            String name = currentLine[0];
-            String city = currentLine[1];
-            Double avgPrice = Double.parseDouble(currentLine[2]);
-            String[] activities = currentLine[3].split(",");
-            String startDate = currentLine[4];
-            String endDate = currentLine[5];
+            String country = currentLine[0];
+            String district = currentLine[1];
+            String name = currentLine[2];
+            String city = currentLine[3];
+            Double avgPrice = Double.parseDouble(currentLine[4]);
+            String[] activities = currentLine[5].split(",");
+            String startDate = currentLine[6];
+            String endDate = currentLine[7];
 
             JSONObject activitiesJson = new JSONObject();
             for (int i = 0; i < activities.length; i++) {
@@ -49,6 +54,7 @@ public class SaveData {
             }
             // The place doesn't exist, so we insert the place.
             else{
+                // Insert place
                 String insertSQL = "INSERT INTO Place"
                         + "(Name, City, AvgPrice, Activities, BeginDate, EndDate) VALUES"
                         + "(?,?,?,?,date(?),date(?))";
@@ -62,6 +68,65 @@ public class SaveData {
 
                 // Execute insert SQL statement
                 preparedStatement.executeUpdate();
+
+                // Search country
+                selectSQL = "SELECT idCountry FROM Country WHERE Name = ?";
+                preparedStatement = conn.prepareStatement(selectSQL);
+                preparedStatement.setString(1, country);
+                rs = preparedStatement.executeQuery();
+
+                // We don't have this country
+                if(!rs.next()){
+                    // Insert country
+                    insertSQL = "INSERT INTO Country"
+                            + "(Name) VALUES"
+                            + "(?)";
+                    preparedStatement = conn.prepareStatement(insertSQL);
+                    preparedStatement.setString(1, country);
+
+                    // Execute insert SQL statement
+                    preparedStatement.executeUpdate();
+                }
+
+                // Search district
+                selectSQL = "SELECT idDistrict FROM District WHERE Name = ?";
+                preparedStatement = conn.prepareStatement(selectSQL);
+                preparedStatement.setString(1, district);
+                rs = preparedStatement.executeQuery();
+
+                // We don't have this district
+                if(!rs.next()) {
+                    // Insert district
+                    insertSQL = "INSERT INTO District"
+                            + "(idCountry, Name) VALUES"
+                            + "((SELECT idCountry FROM Country WHERE Name = ? ), ?)";
+                    preparedStatement = conn.prepareStatement(insertSQL);
+                    preparedStatement.setString(1, country);
+                    preparedStatement.setString(2, district);
+
+                    // Execute insert SQL statement
+                    preparedStatement.executeUpdate();
+                }
+
+                // Search city
+                selectSQL = "SELECT idCity FROM City WHERE Name = ?";
+                preparedStatement = conn.prepareStatement(selectSQL);
+                preparedStatement.setString(1, city);
+                rs = preparedStatement.executeQuery();
+
+                // We don't have this city
+                if(!rs.next()) {
+                    // Insert city
+                    insertSQL = "INSERT INTO City"
+                            + "(idDistrict, Name) VALUES"
+                            + "((SELECT idDistrict FROM District WHERE Name = ? ), ?)";
+                    preparedStatement = conn.prepareStatement(insertSQL);
+                    preparedStatement.setString(1, district);
+                    preparedStatement.setString(2, city);
+
+                    // Execute insert SQL statement
+                    preparedStatement.executeUpdate();
+                }
             }
         }
     }

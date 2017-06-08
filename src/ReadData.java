@@ -18,7 +18,7 @@ public class ReadData {
                 String[] currentLine = line.split(" _ ");
 
                 // Check if the data contains all information
-                if(currentLine.length < 6){
+                if(currentLine.length < 8){
                     System.out.println("Linia " + countLines + " are inregistrari incomplete!");
                 }
                 else {

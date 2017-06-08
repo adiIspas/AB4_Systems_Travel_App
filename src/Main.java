@@ -19,14 +19,14 @@ public class Main {
 
         // Task 1)
         System.out.println("\nTaks 1");
-        IPlace placeTask_1 = Tasks.findLocation(conn,"Cabana A");
+        IPlace placeTask_1 = Tasks.findLocation(conn,"Cabana B");
         System.out.println(placeTask_1);
 
         // Task 2)
 
         // Task 3)
         System.out.println("\nTaks 3");
-        IPlace placeTask_3 = Tasks.findCheapest(conn,"munte");
+        IPlace placeTask_3 = Tasks.findCheapest(conn,"ciclism");
         System.out.println(placeTask_3);
 
         // Close the connection
