@@ -33,7 +33,7 @@ public class Main {
 
         // Task 3)
         System.out.println("\nTaks 3");
-        IPlace placeTask_3 = Tasks.findCheapest(conn,"ciclism");
+        IPlace placeTask_3 = Tasks.findCheapest(conn,"ciclism", 10);
         System.out.println(placeTask_3);
 
         // Close the connection

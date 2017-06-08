@@ -43,11 +43,12 @@ public class Tasks {
         return null;
     }
 
-    static IPlace findCheapest(Connection conn, String activity) throws SQLException, JSONException {
-        String selectSQL = "SELECT * FROM place ORDER BY AvgPrice ASC";
+    static IPlace findCheapest(Connection conn, String activity, Integer numberOfDays) throws SQLException, JSONException {
+        String selectSQL = "SELECT DISTINCT * FROM place WHERE datediff(EndDate,BeginDate) >= ? ORDER BY AvgPrice ASC";
 
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(selectSQL);
+        PreparedStatement preparedStatement = conn.prepareStatement(selectSQL);
+        preparedStatement.setInt(1, numberOfDays);
+        ResultSet rs = preparedStatement.executeQuery();
 
         while(rs.next()){
             String name = rs.getString("Name");

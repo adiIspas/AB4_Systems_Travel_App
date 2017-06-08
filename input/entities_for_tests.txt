@@ -1,0 +1,3 @@
+Romania _ Olt _ Locatia A _ Slatina _ 100 _ act1,act2,act3 _ 2017.01.01 _ 2017.03.07
+Romania _ Bucuresti _ Locatia B _ Bucuresti _ 200 _ act4,act5,act6 _ 2017.03.08 _ 2017.06.01
+Romania _ Constanta _ Locatia C _ Constanta _ 199 _ act6,act7,act8 _ 2017.03.08 _ 2017.03.12

@@ -77,4 +77,33 @@ public class Place implements IPlace {
                 ", endDate=" + endDate +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Place)) return false;
+
+        Place place = (Place) o;
+
+        if (!name.equals(place.name)) return false;
+        if (!city.equals(place.city)) return false;
+        if (!avgPrice.equals(place.avgPrice)) return false;
+        for(int i = 0; i < activities.size(); i++){
+            if(!activities.get(i).equals(place.activities.get(i)))
+                return false;
+        }
+        if (!startDate.equals(place.startDate)) return false;
+        return endDate.equals(place.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + city.hashCode();
+        result = 31 * result + avgPrice.hashCode();
+        result = 31 * result + activities.hashCode();
+        result = 31 * result + startDate.hashCode();
+        result = 31 * result + endDate.hashCode();
+        return result;
+    }
 }
